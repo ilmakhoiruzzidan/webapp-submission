@@ -73,6 +73,8 @@
 </h1>
 <h2>Dashboard</h2>
 
+<!-- Table for Students with merged department and pass percentage -->
+<h3>Student Details</h3>
 <table>
     <tr>
         <th>Department</th>
@@ -90,10 +92,11 @@
             int passed = passedStudentsByDept.get(department);
             double passPercentage = (double) passed / total * 100;
 
-            // For each student in this department, display a row
+            // Display the department for the first student and calculate pass %
             for (int i = 0; i < students.size(); i++) {
                 Student student = students.get(i);
-                if (i == 0) {  // Only display the department name for the first student in the department
+
+                if (i == 0) {  // Display department name and pass percentage only for the first student in the department
     %>
     <tr>
         <td rowspan="<%= students.size() %>"><%= department %>
@@ -103,7 +106,7 @@
         </a></td>
         <td><%= student.getMark() %>
         </td>
-        <td><%= String.format("%.2f", passPercentage) %> %</td>
+        <td rowspan="<%= students.size() %>"><%= String.format("%.2f", passPercentage) %> %</td>
     </tr>
     <%
     } else {
@@ -114,7 +117,6 @@
         </a></td>
         <td><%= student.getMark() %>
         </td>
-        <td><%= String.format("%.2f", passPercentage) %> %</td>
     </tr>
     <%
                     }
