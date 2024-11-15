@@ -23,8 +23,6 @@ public class DashboardServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/pages/login.jsp?error=Please%20%20Login%20First");
         } else {
             request.setAttribute("username", username);
-            System.out.println(username);
-
             request.setAttribute("students", studentDB.getStudents());
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/dashboard.jsp");
