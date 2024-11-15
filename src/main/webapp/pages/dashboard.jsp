@@ -47,7 +47,6 @@
 </h1>
 <h2>Dashboard</h2>
 
-<h3>Student Details</h3>
 <table>
     <tr>
         <th>Department</th>
