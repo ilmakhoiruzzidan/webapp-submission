@@ -6,36 +6,12 @@
 <html>
 <head>
     <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="../css/index.css">
     <script type="text/javascript">
         function showStudentName(studentName) {
             alert("Student Name: " + studentName);
         }
     </script>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f4f4f9;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        .error-message {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
 <%
@@ -46,12 +22,10 @@
 
         List<Student> studentList = StudentDB.getStudents();
 
-        // Maps to count total students and passed students by department
         Map<String, Integer> totalStudentsByDept = new HashMap<>();
         Map<String, Integer> passedStudentsByDept = new HashMap<>();
         Map<String, List<Student>> studentsByDept = new HashMap<>();
 
-        // Process student data
         for (Student student : studentList) {
             String department = student.getDepartment();
             double mark = student.getMark();
@@ -73,7 +47,6 @@
 </h1>
 <h2>Dashboard</h2>
 
-<!-- Table for Students with merged department and pass percentage -->
 <h3>Student Details</h3>
 <table>
     <tr>
@@ -83,7 +56,6 @@
         <th>Pass %</th>
     </tr>
     <%
-        // Loop through departments and students
         for (Map.Entry<String, List<Student>> entry : studentsByDept.entrySet()) {
             String department = entry.getKey();
             List<Student> students = entry.getValue();
@@ -92,11 +64,10 @@
             int passed = passedStudentsByDept.get(department);
             double passPercentage = (double) passed / total * 100;
 
-            // Display the department for the first student and calculate pass %
             for (int i = 0; i < students.size(); i++) {
                 Student student = students.get(i);
 
-                if (i == 0) {  // Display department name and pass percentage only for the first student in the department
+                if (i == 0) {
     %>
     <tr>
         <td rowspan="<%= students.size() %>"><%= department %>
